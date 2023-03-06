@@ -1,0 +1,45 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] numToSplit = br.readLine().split(" ");
+        int N = Integer.valueOf(numToSplit[0]);
+        int M = Integer.valueOf(numToSplit[1]);
+        String str = br.readLine();
+
+        String[] strings = str.split("");
+        String lastStr = "AEIOU";
+        StringBuilder sb = new StringBuilder();
+        String T = "NO";
+
+        N--;
+        for(int i=N; i>=0; i--){
+            if(!lastStr.contains(strings[i])){
+                sb.append(strings[i]);
+                N=i;
+                break;
+            }
+        }
+        if(sb.length() != 0 && N+1 >= M){
+            int cntA = 0;
+            for(int i=N; i>=0; i--){
+                if (strings[i].equals("A") && cntA < 2) {
+                    cntA++;
+                    sb.append(strings[i]);
+                }else if(cntA == 2){
+                    sb.append(strings[i]);
+                }
+                if(sb.length() == M){
+                    T = sb.reverse().toString();
+                    System.out.println("YES");
+                    break;
+                }
+            }
+        }
+        System.out.println(T);
+    }
+}
