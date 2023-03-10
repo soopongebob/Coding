@@ -1,0 +1,24 @@
+public class Main {
+    public static void main(String[] args){
+        int num = 0;
+        int tmp = 0;
+        boolean[] nums = new boolean[10001];
+        // 셀프 넘버를 index로 체크해서, num[i] == 0인 인덱스를 출력한다.
+        for(int i=1; i<nums.length; i++){
+            tmp = i;
+            num = i;
+            while(num != 0) {
+                tmp += num % 10;
+                num /= 10;
+            }
+            if (tmp <= 10000){
+                nums[tmp] = true;
+            }
+        }
+        for(int i=1; i<nums.length; i++){
+            if(!nums[i]){
+                System.out.println(i);
+            }
+        }
+    }
+}
